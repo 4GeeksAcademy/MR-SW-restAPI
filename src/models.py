@@ -42,7 +42,7 @@ class Planet(db.Model):
         }
 
 
-class Character(db.Model):
+class People(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100), nullable=False)
     birth_year = db.Column(db.String(50))
@@ -101,14 +101,14 @@ class Favorite(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     planet_id = db.Column(db.Integer, db.ForeignKey('planet.id'), nullable=True)
-    character_id = db.Column(db.Integer, db.ForeignKey('character.id'), nullable=True)
+    people_id = db.Column(db.Integer, db.ForeignKey('people.id'), nullable=True)
     vehicle_id = db.Column(db.Integer, db.ForeignKey('vehicle.id'), nullable=True)
     movie_id = db.Column(db.Integer, db.ForeignKey('movie.id'), nullable=True)
 
     # Relationships
     user = db.relationship('User', backref='favorites')
     planet = db.relationship('Planet')
-    character = db.relationship('Character')
+    people = db.relationship('People')
     vehicle = db.relationship('Vehicle')
     movie = db.relationship('Movie')
 
@@ -117,7 +117,7 @@ class Favorite(db.Model):
             "id": self.id,
             "user_id": self.user_id,
             "planet_id": self.planet_id,
-            "character_id": self.character_id,
+            "people_id": self.people_id,
             "vehicle_id": self.vehicle_id,
             "movie_id": self.movie_id
         }
